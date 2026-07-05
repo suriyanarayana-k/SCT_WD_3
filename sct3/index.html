@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To Do App</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#74ebd5,#9face6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:500px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    color:#333;
+    margin-bottom:25px;
+}
+
+input[type="text"],
+input[type="datetime-local"]{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.add-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#4CAF50;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#43a047;
+}
+
+ul{
+    list-style:none;
+    margin-top:20px;
+}
+
+li{
+    background:#f8f8f8;
+    border-left:5px solid #4CAF50;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+span{
+    font-size:18px;
+    font-weight:bold;
+}
+
+small{
+    display:block;
+    color:gray;
+    margin:8px 0 12px;
+}
+
+li button{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+    margin-right:8px;
+    transition:.3s;
+}
+
+li button:hover{
+    transform:scale(1.05);
+}
+
+.delete{
+    background:#e53935;
+}
+
+.complete{
+    background:#43a047;
+}
+
+.edit{
+    background:#1e88e5;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>TO DO LIST</h1>
+
+<input id="one" type="text" placeholder="Enter your task">
+
+<input id="a" type="datetime-local">
+
+<button class="add-btn" onclick="btnfunc()">ADD TASK</button>
+
+<ul id="two">
+
+<li>
+
+<span>HELLO</span>
+
+<br>
+
+<small>No Date</small>
+
+<button class="delete" onclick="del(event)">Delete</button>
+
+<button class="complete" onclick="comp(event)">Complete</button>
+
+<button class="edit" onclick="edit(event)">Edit</button>
+
+</li>
+
+</ul>
+
+</div>
+
+<script>
+
+var a=document.getElementById("one")
+var b=document.getElementById("two")
+var e=document.getElementById("a")
+
+function btnfunc(){
+
+    if(a.value==""){
+        alert("Please enter a task")
+        return
+    }
+
+    var c=document.createElement("li")
+
+    c.innerHTML=
+    "<span>"+a.value+"</span>"+
+    "<br>"+
+    "<small>"+e.value+"</small>"+
+    "<button class='delete' onclick='del(event)'>Delete</button> "+
+    "<button class='complete' onclick='comp(event)'>Complete</button> "+
+    "<button class='edit' onclick='edit(event)'>Edit</button>"
+
+    b.append(c)
+
+    a.value=""
+    e.value=""
+}
+
+function del(event){
+    event.target.parentElement.remove()
+}
+
+function comp(event){
+
+    var item=event.target.parentElement
+
+    var task=item.querySelector("span")
+
+    if(task.style.textDecoration=="line-through"){
+
+        task.style.textDecoration="none"
+        task.style.color="black"
+        event.target.textContent="Complete"
+
+    }
+
+    else{
+
+        task.style.textDecoration="line-through"
+        task.style.color="gray"
+        event.target.textContent="Undo"
+
+    }
+
+}
+
+function edit(event){
+
+    var item=event.target.parentElement
+
+    var task=item.querySelector("span")
+
+    var newtask=prompt("Enter the new task",task.textContent)
+
+    if(newtask!=null && newtask!=""){
+
+        task.textContent=newtask
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
